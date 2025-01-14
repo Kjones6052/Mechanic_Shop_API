@@ -3,9 +3,10 @@
 # Imports
 from app.models import Customer
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from app.extensions import ma
 
 
-class CustomerSchema(SQLAlchemyAutoSchema):
+class CustomerSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Customer
     

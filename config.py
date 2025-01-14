@@ -2,7 +2,7 @@
 
 # Development Config
 class DevelopmentConfig:
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:7Raffi!Codes7@localhost/mechanic_shop_db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
     DEBUG = True
 
 # Testing Config
