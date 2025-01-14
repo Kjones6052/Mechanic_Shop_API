@@ -2,11 +2,12 @@
 
 # Imports
 from app.models import Service_Ticket
-from app.extensions import ma
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow import fields
 
+
 # Member Schema
-class ServiceTicketSchema(ma.SQLAlchemyAutoSchema):
+class ServiceTicketSchema(SQLAlchemyAutoSchema):
     customer = fields.Nested("CustomerSchema")
     mechanics = fields.Nested("MechanicSchema", many=True)
     class Meta:
@@ -16,4 +17,4 @@ class ServiceTicketSchema(ma.SQLAlchemyAutoSchema):
 # Instantiating Schema(s)
 service_ticket_schema = ServiceTicketSchema()
 service_tickets_schema = ServiceTicketSchema(many=True)
-return_service_ticket_schema = ServiceTicketSchema(exclude=["member_id"])
+return_service_ticket_schema = ServiceTicketSchema(exclude=["customer_id"])
