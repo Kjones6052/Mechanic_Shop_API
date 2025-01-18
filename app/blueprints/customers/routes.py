@@ -68,9 +68,7 @@ def update_customer(customer_id):
 # Delete Customer
 @customers_bp.route('/<int:customer_id>', methods=['DELETE'])
 def delete_customer(customer_id):
-    query = delete(Customer).where(Customer.id == customer_id)
-    customer = db.session.execute(query)
-
+    customer = db.session.get(Customer, customer_id)
     db.session.delete(customer)
     db.session.commit()
     return jsonify({"message": f"succesfully deleted customer {customer_id}"})

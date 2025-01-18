@@ -267,7 +267,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"VIN\": \"12345678901234567\",\r\n    \"service_date\": \"2025-01-10\",\r\n    \"service_desc\": \"Oil change\",\r\n    \"customer_id\": \"1\"\r\n}",
+							"raw": "{\r\n    \"VIN\": \"12345678901234567\",\r\n    \"service_date\": \"2025-01-10\",\r\n    \"service_desc\": \"Oil change\",\r\n    \"customer_id\": \"1\",\r\n    \"mechanic_ids\": [1, 2]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

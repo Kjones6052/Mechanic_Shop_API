@@ -2,10 +2,10 @@
 
 # Imports
 from app.models import Mechanic
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from app.extensions import ma
 
 # Mechanic Schema
-class MechanicSchema(SQLAlchemyAutoSchema):
+class MechanicSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Mechanic
     
