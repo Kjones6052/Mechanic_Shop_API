@@ -93,6 +93,7 @@ def edit_service_ticket(service_ticket_id):
 def add_required_parts(service_ticket_id):
     try:
         service_ticket_data = required_parts_schema.load(request.json) # creating instance of required parts schema
+        print(service_ticket_data)
     except ValidationError as e:
         return jsonify(e.messages), 400 # if error return message to user display
 
@@ -102,10 +103,8 @@ def add_required_parts(service_ticket_id):
     # verify service ticket exists
     if not service_ticket:
         return jsonify({"message": "no ticket found"})
+    
+    add_part = RequiredParts(ticket_id=service_ticket.id, part_id=service_ticket_data['part_id'], quantity=service_ticket_data['quantity']) # get part data and assign to variable
+    db.session.add(add_part) # add part to service ticket
 
-    for part in service_ticket_data['required_parts']:# looping through each part in the service ticket
-        add_part = RequiredParts(ticket_id=service_ticket.id, part_id=part['id'], quantity=part['quantity']) # get part data and assign to variable
-        print(add_part)
-        db.session.add(add_part) # add part to service ticket
-
-    return jsonify({"message": "success"})
+    return jsonify({"message": "success"}), 200

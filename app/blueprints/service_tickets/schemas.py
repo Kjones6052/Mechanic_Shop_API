@@ -26,7 +26,10 @@ class EditServiceTicketSchema(ma.Schema):
 class RequiredPartsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = RequiredParts
-    part = fields.Nested("PartSchema")
+        include_fk = True
+    part = fields.Nested("PartSchema", exclude=["id"])
+    part_id = fields.Int()
+    
 
 # Instantiating Schema(s)
 service_ticket_schema = ServiceTicketSchema()
