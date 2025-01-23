@@ -6,11 +6,15 @@ from app.blueprints.mechanics import mechanics_bp
 from app.blueprints.mechanics.schemas import mechanic_schema, mechanics_schema
 from marshmallow import ValidationError
 from app.models import Mechanic, db
-from sqlalchemy import select, delete
+from sqlalchemy import select
+from app.extensions import cache, limiter
+
 
 
 # New Mechanic
 @mechanics_bp.route("/", methods=['POST'])
+# Limiting this route to reduce the amount of failed attempts a user can do to prevent excessive use of resources
+@limiter.limit("3 per hour")
 def create_mechanic():
     try: 
 		# Deserialize and validate input data
@@ -30,10 +34,13 @@ def create_mechanic():
 
 # Get Mechanics (all)
 @mechanics_bp.route('/', methods=['GET'])
+# Cached list of mechanics to satisfy repetative requests faster
+@cache.cached(timeout=60)
 def get_mechanics():
-    query = select(Mechanic)
-    result = db.session.execute(query).scalars().all()
-    return mechanics_schema.jsonify(result), 200 
+    query = select(Mechanic) # create query to get all mechanics
+    result = db.session.execute(query).scalars().all() # execute query and assign to variable
+    return mechanics_schema.jsonify(result), 200 # return mechanics data to user display according to schema
+
     
 # Update Mechanic
 @mechanics_bp.route('/<int:mechanic_id>', methods=['PUT'])
@@ -64,3 +71,13 @@ def delete_mechanic(mechanic_id):
     return jsonify({"message": f"succesfully deleted mechanic {mechanic_id}"})
 
 
+# Most Valuable Mechanic (MVM)
+@mechanics_bp.route("/mvm", methods=['GET'])
+def most_valuable_mechanic():
+    query = select(Mechanic)
+    mechanics = db.session.execute(query).scalars().all()
+
+    # sorting using lamba function (key= lambda object: how to sort)
+    mechanics.sort(key= lambda mechanic: len(mechanic.service_tickets), reverse=True) # sorting mechanics according to number of service tickets in reverse order
+
+    return mechanics_schema.jsonify(mechanics) # return sorted list of mechanics to user display according to schema

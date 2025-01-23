@@ -1,3 +1,4 @@
+# This file is used to run the app
 
 # Imports
 from app import create_app

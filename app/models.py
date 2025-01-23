@@ -29,8 +29,9 @@ class Customer(Base):
     name: Mapped[str] = mapped_column(db.String(100), nullable=False)
     email: Mapped[str] = mapped_column(db.String(150), unique=True, nullable=False)
     phone: Mapped[str] = mapped_column(db.String(10), nullable=False)
+    password: Mapped[str] = mapped_column(db.String(100), nullable=False)
 
-    service_tickets: Mapped[List["Service_Ticket"]] = db.relationship(back_populates="customer")
+    service_tickets: Mapped[List["Service_Ticket"]] = db.relationship(back_populates="customer", cascade="all, delete")
 
 # Service Tickets
 class Service_Ticket(Base):
@@ -44,6 +45,7 @@ class Service_Ticket(Base):
 
     customer: Mapped["Customer"] = db.relationship(back_populates="service_tickets")
     mechanics: Mapped[List["Mechanic"]] = db.relationship(secondary=service_mechanics, back_populates="service_tickets")
+    required_parts: Mapped[List["RequiredParts"]] = db.relationship(back_populates="service_ticket")
 
 # Mechanics
 class Mechanic(Base):
@@ -57,3 +59,26 @@ class Mechanic(Base):
 
     service_tickets: Mapped[List["Service_Ticket"]] = db.relationship(secondary=service_mechanics)
 
+# Parts (inventory)
+class Part(Base):
+    __tablename__ = "parts"
+
+    # attributes
+    id: Mapped[int] = mapped_column(primary_key=True)
+    part_name: Mapped[str] = mapped_column(db.String(100), nullable=False)
+    price: Mapped[float] = mapped_column(db.Float, nullable=False)
+
+    required_parts: Mapped[List["RequiredParts"]] = db.relationship(back_populates="part")
+
+# Required Parts
+class RequiredParts(Base):
+    __tablename__ = "required_parts"
+
+    # attributes
+    id: Mapped[int] = mapped_column(primary_key=True)
+    ticket_id: Mapped[int] = mapped_column(db.ForeignKey("service_tickets.id"), nullable=False)
+    part_id: Mapped[int] = mapped_column(db.ForeignKey("parts.id"), nullable=False)
+    quantity: Mapped[int] = mapped_column(db.Integer, nullable=False)
+
+    service_ticket: Mapped["Service_Ticket"] = db.relationship(back_populates="required_parts")
+    part: Mapped["Part"] = db.relationship(back_populates="required_parts")
