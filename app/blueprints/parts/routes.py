@@ -49,7 +49,7 @@ def update_part(part_id):
     
     # if no part return message to user display
     if part == None: 
-        return jsonify({"message": "invalid part id"})
+        return jsonify({"message": "invalid part id"}), 400
 
     try: 
         part_data = part_schema.load(request.json) # validate part data with schema
@@ -70,4 +70,4 @@ def delete_part(part_id):
     part = db.session.get(Part, part_id) # get part 
     db.session.delete(part) # detele part from database
     db.session.commit() # commit changes to database
-    return jsonify({"message": f"succesfully deleted part {part_id}"})
+    return jsonify({"message": f"succesfully deleted part {part_id}"}), 200

@@ -28,7 +28,7 @@ def create_service_ticket():
         if mechanic:
             new_service_ticket.mechanics.append(mechanic)
         else:
-            return jsonify({"message": "invalid mechanic id"})
+            return jsonify({"message": "invalid mechanic id"}), 400
         
     db.session.add(new_service_ticket)
     db.session.commit()
@@ -67,7 +67,7 @@ def edit_service_ticket(service_ticket_id):
 
     # verify service ticket exists
     if not service_ticket:
-        return jsonify({"message": "no ticket found"})
+        return jsonify({"message": "no ticket found"}), 400
 
     for mechanic_id in service_ticket_edits['add_mechanic_ids']: # for each mechanic id input
         query = select(Mechanic).where(Mechanic.id == mechanic_id) # create query to get mechanic according to id
@@ -102,7 +102,7 @@ def add_required_parts(service_ticket_id):
 
     # verify service ticket exists
     if not service_ticket:
-        return jsonify({"message": "no ticket found"})
+        return jsonify({"message": "no ticket found"}), 400
     
     add_part = RequiredParts(ticket_id=service_ticket.id, part_id=service_ticket_data['part_id'], quantity=service_ticket_data['quantity']) # get part data and assign to variable
     db.session.add(add_part) # add part to service ticket

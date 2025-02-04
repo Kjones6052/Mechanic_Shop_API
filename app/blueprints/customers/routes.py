@@ -7,7 +7,7 @@ from app.blueprints.customers.schemas import customer_schema, customers_schema, 
 from marshmallow import ValidationError
 from app.models import Customer, db
 from sqlalchemy import select
-from app.extensions import limiter, cache
+from app.extensions import limiter
 from app.utils.util import encode_token, token_required
 
 
@@ -98,7 +98,7 @@ def update_customer(customer_id):
     customer = db.session.execute(query).scalars().first()
     
     if customer == None:
-        return jsonify({"message": "invalid customer id"})
+        return jsonify({"message": "invalid customer id"}), 400
 
     try: 
         customer_data = customer_schema.load(request.json)
@@ -118,4 +118,4 @@ def delete_customer(customer_id):
     customer = db.session.get(Customer, customer_id)
     db.session.delete(customer)
     db.session.commit()
-    return jsonify({"message": f"succesfully deleted customer {customer_id}"})
+    return jsonify({"message": f"succesfully deleted customer {customer_id}"}), 200

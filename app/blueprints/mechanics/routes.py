@@ -49,7 +49,7 @@ def update_mechanic(mechanic_id):
     mechanic = db.session.execute(query).scalars().first()
     
     if mechanic == None:
-        return jsonify({"message": "invalid mechanic id"})
+        return jsonify({"message": "invalid mechanic id"}), 400
 
     try: 
         mechanic_data = mechanic_schema.load(request.json)
@@ -68,7 +68,7 @@ def delete_mechanic(mechanic_id):
     mechanic = db.session.get(Mechanic, mechanic_id)
     db.session.delete(mechanic)
     db.session.commit()
-    return jsonify({"message": f"succesfully deleted mechanic {mechanic_id}"})
+    return jsonify({"message": f"succesfully deleted mechanic {mechanic_id}"}), 200
 
 
 # Most Valuable Mechanic (MVM)
