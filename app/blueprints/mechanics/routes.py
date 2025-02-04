@@ -80,4 +80,4 @@ def most_valuable_mechanic():
     # sorting using lamba function (key= lambda object: how to sort)
     mechanics.sort(key= lambda mechanic: len(mechanic.service_tickets), reverse=True) # sorting mechanics according to number of service tickets in reverse order
 
-    return mechanics_schema.jsonify(mechanics) # return sorted list of mechanics to user display according to schema
+    return mechanics_schema.jsonify(mechanics), 200 # return sorted list of mechanics to user display according to schema

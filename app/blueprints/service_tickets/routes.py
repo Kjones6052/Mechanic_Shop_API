@@ -86,7 +86,7 @@ def edit_service_ticket(service_ticket_id):
             service_ticket.mechanics.remove(mechanic)
 
     db.session.commit() # commit changes to database
-    return return_service_ticket_schema.jsonify(service_ticket)
+    return return_service_ticket_schema.jsonify(service_ticket), 200
 
 # Add Part to Service Ticket 
 @service_tickets_bp.route('/<int:service_ticket_id>/add_part', methods=['PUT'])
