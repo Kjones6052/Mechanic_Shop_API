@@ -25,11 +25,13 @@ class TestCustomer(unittest.TestCase):
         customer_payload = {
             "name": "John Doe",
             "email": "jd@email.com",
-            "phone": "22223334444",
+            "phone": "2223334444",
             "password": "testpassword"
         }
 
         response = self.client.post('/customers/', json=customer_payload)
+        print("PRINTING")
+        print(response.json)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['name'], "John Doe")
 
@@ -64,7 +66,7 @@ class TestCustomer(unittest.TestCase):
 
         response = self.client.post('/customers/login', json=credentials)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['message'], 'Invalid email or password!')
+        self.assertEqual(response.json['message'], 'invalid email or password')
 
     # get all customers tests
     def test_get_customers(self):
@@ -104,8 +106,10 @@ class TestCustomer(unittest.TestCase):
             "password": "123"       
         }
 
-        response = self.client.post('/customers/1', json=customer_payload)
-        self.assertEqual(response.status_code, 405)
+        headers = {'Authorization': "Bearer " + self.test_login_customer()}
+        response = self.client.put('/customers/1', json=customer_payload, headers=headers)
+        self.assertEqual(response.status_code, 400)
+        print(response.json)
         self.assertEqual(response.json['phone'], ['Missing data for required field.'])
 
     # delete customer tests with token

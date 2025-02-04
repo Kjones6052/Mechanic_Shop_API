@@ -41,7 +41,7 @@ def login():
 
         return jsonify(response), 200 # return successful user message to user display
     else:
-        return jsonify({"message": "invalid email or password"}) # if error diplay to user
+        return jsonify({"message": "invalid email or password"}), 400 # if error diplay to user
 
 
 # Create New Customer
