@@ -66,9 +66,12 @@ def update_mechanic(mechanic_id):
 @mechanics_bp.route('/<int:mechanic_id>', methods=['DELETE'])
 def delete_mechanic(mechanic_id):
     mechanic = db.session.get(Mechanic, mechanic_id)
-    db.session.delete(mechanic)
-    db.session.commit()
-    return jsonify({"message": f"succesfully deleted mechanic {mechanic_id}"}), 200
+    if mechanic:
+        db.session.delete(mechanic)
+        db.session.commit()
+        return jsonify({"message": f"succesfully deleted mechanic {mechanic_id}"}), 200
+    return jsonify({"message": 'mechanic not found'}), 400
+    
 
 
 # Most Valuable Mechanic (MVM)

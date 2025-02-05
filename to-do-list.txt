@@ -1,3 +1,5 @@
 Project To Do List:
 
- - create test cases for each blueprint (positive/negative)
+ - modify test cases for service ticket blueprint (positive/negative)
+
+ - update swagger file to include all covered error codes in examples

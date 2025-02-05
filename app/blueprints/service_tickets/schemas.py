@@ -7,13 +7,14 @@ from marshmallow import fields
 
 # service ticket Schema
 class ServiceTicketSchema(ma.SQLAlchemyAutoSchema):
+    required_parts = fields.Nested("RequiredPartsSchema", exclude=["id"], many=True)
+    customer = fields.Nested("CustomerSchema")
+    mechanics = fields.Nested("MechanicSchema", many=True)
     class Meta:
         model = Service_Ticket
         fields = ('VIN', 'service_date', 'service_desc', 'customer_id', 'mechanic_ids')
         include_relationships = True
-    required_parts = fields.Nested("RequiredPartsSchema", exclude=["id"], many=True)
-    customer = fields.Nested("CustomerSchema")
-    mechanics = fields.Nested("MechanicSchema", many=True)
+    
     
 #  edit service ticket schema
 class EditServiceTicketSchema(ma.Schema):

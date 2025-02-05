@@ -68,6 +68,8 @@ def update_part(part_id):
 @parts_bp.route('/<int:part_id>', methods=['DELETE'])
 def delete_part(part_id):
     part = db.session.get(Part, part_id) # get part 
-    db.session.delete(part) # detele part from database
-    db.session.commit() # commit changes to database
-    return jsonify({"message": f"succesfully deleted part {part_id}"}), 200
+    if part:
+        db.session.delete(part) # detele part from database
+        db.session.commit() # commit changes to database
+        return jsonify({"message": f"succesfully deleted part {part_id}"}), 200
+    return jsonify({"message": "part not found"}), 400

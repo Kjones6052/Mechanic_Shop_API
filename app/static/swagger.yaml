@@ -24,8 +24,8 @@ paths:
   # login customer
   /customers/login: 
     post: 
-			tags:
-				- Customers
+      tags:
+      - Customers
       summary: "Login endpoint, (generates token)"
       description: "Validates customer credentials, generates and return a customer specific token."
       parameters:
@@ -47,12 +47,12 @@ paths:
             status: "success"
 
   # create customer
-  /customers:
+  /customers/:
     post:
       tags:
         - Customers
-      summary: "Endpoint to create/register a new customer."
-      description: "Endpoint to create a new customer in our Mechanic Shop Management System, emails must be unique."
+      summary: "Create new customer endpoint"
+      description: "Create a new customer in database, emails must be unique."
       parameters:
         - in: "body"
           name: "body"
@@ -78,8 +78,8 @@ paths:
     get:
       tags:
         - Customers
-      summary: "Returns all Customers"
-      description: "Endpoint to retrieve a list of all customers."
+      summary: "Get all customers endpoint"
+      description: "Retrieve a list of all customers, including all customer data."
       responses:
         200:
           description: "Retrieved Customers Successfully"           
@@ -87,25 +87,24 @@ paths:
             $ref: "#/definitions/AllCustomers" 
 
   # get customer by id
-  /customers:
+  /customers/{customer_id}:
     get:
       tags:
         - Customers
-      summary: "Returns Customer with matching customer id"
-      description: "Endpoint to receive a customer id and return the matching customer data."
+      summary: "Get customer by id endpoint"
+      description: "Receives a customer id and returns the matching customer data."
       responses:
         200:
           description: "Retrieved Customer Successfully"           
           schema:
             $ref: "#/definitions/GetCustomerByID" 
 
-  # update customer
-  /customers:
+  # update customer by id
     put: 
       tags:
         - Customers
-      summary: "Endpoint to update a customer."
-      description: "Endpoint to update a customer, this is a token authenticated route, and the customer must be logged in to update their account."
+      summary: "Update customer endpoint, (requires login)"
+      description: "Endpoint to update a customer. Token authenticated route, customer must be logged in to update their account."
       security:
         - bearerAuth: []
       parameters:
@@ -128,13 +127,12 @@ paths:
               email: "dohnj@email.com"
               password: "password123" 
 
-  # delete customer
-  /customers:
+  # delete customer by id
     delete:
       tags:
         - Customers
-      summary: "Endpoint to delete a customer"
-      description: "Endpoint to delete a customer. Requires token authentication, customer must be logged in to delete their account"
+      summary: "Delete customer endpoint, (requires login)"
+      description: "Endpoint to delete a customer. Token authenticated route, customer must be logged in to delete their account"
       security:
        - bearerAuth: []
       responses:
@@ -149,12 +147,12 @@ paths:
 
 # Mechanics
   # create mechanic
-  /mechanics:
+  /mechanics/:
     post:
       tags:
         - Mechanics
-      summary: "Endpoint to create/register a new mechanic."
-      description: "Endpoint to create a new mechanic."
+      summary: "Create new mechanic endpoint"
+      description: "Creates a new mechanic in database."
       parameters:
         - in: "body"
           name: "body"
@@ -180,8 +178,8 @@ paths:
     get:
       tags:
         - Mechanics
-      summary: "Returns all Mechanics"
-      description: "Endpoint to retrieve a list of all mechanics."
+      summary: "Get all mechanics endpoint"
+      description: "Returns a list of all mechanics including all mechanic data."
       responses:
         200:
           description: "Retrieved Mechanics Successfully"           
@@ -189,12 +187,12 @@ paths:
             $ref: "#/definitions/AllMechanics" 
 
   # update mechanic
-  /mechanics:
+  /mechanics/{mechanic_id}:
     put: 
       tags:
         - Mechanics
-      summary: "Endpoint to update a mechanic."
-      description: "Endpoint to update a mechanic."
+      summary: "Update mechanic endpoint"
+      description: "Endpoint to update the information of a specific mechanic according to the provided mechanic ID."
       parameters:
         - in: "body"
           name: "body"
@@ -216,12 +214,11 @@ paths:
               salary: 100.00
 
   # delete mechanic
-  /mechanics:
     delete:
       tags:
         - Mechanics
-      summary: "Endpoint to delete a mechanic"
-      description: "Endpoint to delete a mechanic."
+      summary: "Delete mechanic endpoint"
+      description: "Endpoint to delete a mechanic from the database."
       responses:
         200:
           description: "Successfully Deleted Mechanic"           
@@ -232,12 +229,12 @@ paths:
               message: "successfully deleted mechanic <mechanic_id>."
 
   # most valuable mechanic
-  /mechanics:
+  /mechanics/mvm:
     get:
       tags:
         - Mechanics
-      summary: "Endpoint to get MVM"
-      description: "Endpoint that will search through the list of service tickets to identify mechanics who worked on the most service tickets."
+      summary: "Get most valuable mechanic endpoint"
+      description: "Endpoint that will search through the list of service tickets, returns mechanic who worked on the most service tickets."
       responses:
         200:
           description: "Retrived Most Valuable Mechanic Successfully"
@@ -246,12 +243,12 @@ paths:
 
 # Parts
   # add part
-  /parts:
+  /parts/:
     post:
       tags:
         - Parts
-      summary: "Endpoint to add/register a new part."
-      description: "Endpoint to add a new part."
+      summary: "Add part endpoint"
+      description: "Endpoint to add a new part to the inventory."
       parameters:
         - in: "body"
           name: "body"
@@ -275,8 +272,8 @@ paths:
     get:
       tags:
         - Parts
-      summary: "Returns all Parts"
-      description: "Endpoint to retrieve a list of all parts."
+      summary: "Get all parts endpoint"
+      description: "Returns a list of all parts, including all part data."
       responses:
         200:
           description: "Retrieved Parts Successfully"           
@@ -284,12 +281,12 @@ paths:
             $ref: "#/definitions/AllParts"
 
   # update part
-  /parts:
+  /parts/{part_id}:
     put: 
       tags:
         - Parts
-      summary: "Endpoint to update a part."
-      description: "Endpoint to update a part."
+      summary: "Update part endpoint"
+      description: "Update information about a part based on the part ID."
       parameters:
         - in: "body"
           name: "body"
@@ -309,12 +306,11 @@ paths:
               price: 110.00
 
   # delete part
-  /parts:
     delete:
       tags:
         - Parts
-      summary: "Endpoint to delete a part"
-      description: "Endpoint to delete a part."
+      summary: "Delete part endpoint"
+      description: "Removes a part from the inventory based on the part ID."
       responses:
         200:
           description: "Successfully Deleted Part"           
@@ -326,12 +322,12 @@ paths:
 
 # Service Tickets
   # create service ticket
-  /service_tickets:
+  /service_tickets/:
     post:
       tags:
         - ServiceTickets
-      summary: "Endpoint to create/register a new service ticket."
-      description: "Endpoint to add a new service ticket."
+      summary: "Create service ticket endpoint"
+      description: "Creates a new service ticket."
       parameters:
         - in: "body"
           name: "body"
@@ -349,7 +345,7 @@ paths:
               id: 1
               VIN: "12345678901234567"
               service_date: "2025-01-30"
-              service_desc: tires
+              service_desc: "tires"
               customer_id: 1
 
   # get all service tickets
@@ -357,8 +353,8 @@ paths:
     get:
       tags:
         - ServiceTickets
-      summary: "Returns list of service tickets"
-      description: "Endpoint to retrieve a list of all service tickets."
+      summary: "Get service tickets endpoint"
+      description: "Returns a list of all service tickets, including all service ticket data."
       responses:
         200:
           description: "Retrieved service tickets successfully"           
@@ -366,12 +362,12 @@ paths:
             $ref: "#/definitions/GetServiceTickets"
 
   # get service tickets by customer id
-  /service_tickets:
+  /service_tickets/{customer_id}:
     get:
       tags:
         - ServiceTickets
-      summary: "Returns service tickets with matching customer id"
-      description: "Endpoint to receive a customer id and return the matching service tickets data."
+      summary: "Get service tickets by customer id endpoint"
+      description: "Takes a customer id and returns the matching service tickets data associated with the customer."
       responses:
         200:
           description: "Retrieved service tickets successfully"           
@@ -379,12 +375,12 @@ paths:
             $ref: "#/definitions/GetCustomerServiceTickets"
 
   # edit mechanics on service ticket
-  /service_tickets:
+  /service_tickets/{ticket_id}:
     put: 
       tags:
         - ServiceTickets
-      summary: "Endpoint to add/remove mechanic from a service ticket."
-      description: "Endpoint to receive a service ticket id and add or remove a mechanic(s) from the service ticket."
+      summary: "Add/remove mechanic from a service ticket endpoint"
+      description: "Takes a service ticket id to add or remove a mechanic(s) from the service ticket."
       parameters:
         - in: "body"
           name: "body"

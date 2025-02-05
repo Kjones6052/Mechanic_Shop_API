@@ -30,8 +30,6 @@ class TestCustomer(unittest.TestCase):
         }
 
         response = self.client.post('/customers/', json=customer_payload)
-        print("PRINTING")
-        print(response.json)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['name'], "John Doe")
 
@@ -109,7 +107,6 @@ class TestCustomer(unittest.TestCase):
         headers = {'Authorization': "Bearer " + self.test_login_customer()}
         response = self.client.put('/customers/1', json=customer_payload, headers=headers)
         self.assertEqual(response.status_code, 400)
-        print(response.json)
         self.assertEqual(response.json['phone'], ['Missing data for required field.'])
 
     # delete customer tests with token
