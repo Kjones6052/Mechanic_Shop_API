@@ -12,7 +12,7 @@ class ServiceTicketSchema(ma.SQLAlchemyAutoSchema):
     mechanics = fields.Nested("MechanicSchema", many=True)
     class Meta:
         model = Service_Ticket
-        fields = ('VIN', 'service_date', 'service_desc', 'customer_id', 'mechanic_ids')
+        fields = ('VIN', 'service_date', 'service_desc', 'customer_id', 'mechanic_ids', 'required_parts')
         include_relationships = True
     
     

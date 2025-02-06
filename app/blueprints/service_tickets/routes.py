@@ -52,6 +52,10 @@ def get_service_ticket():
 def get_customer_service_tickets(customer_id):
     query = select(Service_Ticket).where(Service_Ticket.customer_id == customer_id)
     customer_service_tickets = db.session.execute(query).scalars().all()
+
+    if not customer_service_tickets:
+        return jsonify({"message": "No customer service tickets found"}), 400
+    
     return service_tickets_schema.jsonify(customer_service_tickets), 200
 
 # Edit Service Ticket 
@@ -93,7 +97,6 @@ def edit_service_ticket(service_ticket_id):
 def add_required_parts(service_ticket_id):
     try:
         service_ticket_data = required_parts_schema.load(request.json) # creating instance of required parts schema
-        print(service_ticket_data)
     except ValidationError as e:
         return jsonify(e.messages), 400 # if error return message to user display
 
@@ -107,4 +110,4 @@ def add_required_parts(service_ticket_id):
     add_part = RequiredParts(ticket_id=service_ticket.id, part_id=service_ticket_data['part_id'], quantity=service_ticket_data['quantity']) # get part data and assign to variable
     db.session.add(add_part) # add part to service ticket
 
-    return jsonify({"message": "success"}), 200
+    return return_service_ticket_schema.jsonify(service_ticket), 200

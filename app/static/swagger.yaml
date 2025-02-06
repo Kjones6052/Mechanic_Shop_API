@@ -27,7 +27,7 @@ paths:
       tags:
       - Customers
       summary: "Login endpoint, (generates token)"
-      description: "Validates customer credentials, generates and return a customer specific token."
+      description: "Validates customer credentials, generates and returns a customer specific token."
       parameters:
         - in: "body"
           name: "body"
@@ -92,7 +92,7 @@ paths:
       tags:
         - Customers
       summary: "Get customer by id endpoint"
-      description: "Receives a customer id and returns the matching customer data."
+      description: "Takes a customer id and returns the matching customer data."
       responses:
         200:
           description: "Retrieved Customer Successfully"           
@@ -375,7 +375,7 @@ paths:
             $ref: "#/definitions/GetCustomerServiceTickets"
 
   # edit mechanics on service ticket
-  /service_tickets/{ticket_id}:
+  /service_tickets/{ticket_id}/edit:
     put: 
       tags:
         - ServiceTickets
@@ -400,12 +400,12 @@ paths:
               remove_mechanic_ids: [2]
 
   # add parts to service ticket
-  /service_tickets:
+  /service_tickets/{ticket_id}/add_part:
     put: 
       tags:
         - ServiceTickets
-      summary: "Endpoint to add a part to a service ticket."
-      description: "Endpoint to receive a service ticket id and add a part to the service ticket in the Mechanic Shop Management System inventory database."
+      summary: "Add a part to a service ticket endpoint"
+      description: "Takes a service ticket id and adds a part to the service ticket according to the part id and quantity."
       parameters:
         - in: "body"
           name: "body"
