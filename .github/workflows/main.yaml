@@ -65,4 +65,4 @@ jobs:
           echo "Contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
 
       - name: Run tests
-        
+        run: python -m unittest discover -s tests -p 'test_*.py'
