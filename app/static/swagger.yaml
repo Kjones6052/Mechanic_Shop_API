@@ -46,6 +46,15 @@ paths:
             message: "Login successful"
             status: "success"
 
+        400:
+          description: "Invalid email or password"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Invalid email or password"
+            status: "Error"
+
   # create customer
   /customers/:
     post:
@@ -73,6 +82,15 @@ paths:
               email: "johnd@email.com"
               password: "password123"
 
+        400:
+          description: "Missing data"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing data for required field."
+            status: "Error"
+
   # get all customers
   /customers:
     get:
@@ -98,6 +116,22 @@ paths:
           description: "Retrieved Customer Successfully"           
           schema:
             $ref: "#/definitions/GetCustomerByID" 
+          examples:
+            application/json:
+              id: 1
+              name: "John Doe"
+              phone: "1112223333"
+              email: "johnd@email.com"
+              password: "password123"
+
+        404:
+          description: "Customer not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Customer not found"
+            status: "Error"
 
   # update customer by id
     put: 
@@ -127,6 +161,51 @@ paths:
               email: "dohnj@email.com"
               password: "password123" 
 
+        404:
+          description: "Customer not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Customer not found"
+            status: "Error"
+
+        400:
+          description: "Missing token"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing token"
+            status: "Error"
+
+        400:
+          description: "Token expired"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Token expired"
+            status: "Error"
+
+        400:
+          description: "Invalid token"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Invalid token"
+            status: "Error"
+
+        401:
+          description: "Unauthorized"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Unauthorized: You must be logged in to access this."
+            status: "Error"
+
   # delete customer by id
     delete:
       tags:
@@ -144,6 +223,41 @@ paths:
             application/json:
               message: "successfully deleted user <customer_id>."
 
+        400:
+          description: "Missing token"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing token"
+            status: "Error"
+
+        400:
+          description: "Token expired"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Token expired"
+            status: "Error"
+
+        400:
+          description: "Invalid token"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Invalid token"
+            status: "Error"
+
+        401:
+          description: "Unauthorized"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Unauthorized: You must be logged in to access this."
+            status: "Error"
 
 # Mechanics
   # create mechanic
@@ -172,6 +286,15 @@ paths:
               email: "jwfixit@email.com"
               phone: "2221114444"
               salary: 100.00
+
+        400:
+          description: "Missing data"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing data for required field."
+            status: "Error"
 
   # get all mechanics
   /mechanics:
@@ -213,6 +336,15 @@ paths:
               phone: "7894560123"
               salary: 100.00
 
+        404:
+          description: "Mechanic not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Mechanic not found"
+            status: "Error"
+
   # delete mechanic
     delete:
       tags:
@@ -227,6 +359,15 @@ paths:
           examples:
             application/json:
               message: "successfully deleted mechanic <mechanic_id>."
+
+        404:
+          description: "Mechanic not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Mechanic not found"
+            status: "Error"
 
   # most valuable mechanic
   /mechanics/mvm:
@@ -267,6 +408,15 @@ paths:
               part_name: "tire"
               price: 100.00
 
+        400:
+          description: "Missing data"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing data for required field."
+            status: "Error"
+
   # get all parts
   /parts:
     get:
@@ -305,6 +455,15 @@ paths:
               part_name: "tire"
               price: 110.00
 
+        404:
+          description: "Part not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Part not found"
+            status: "Error"
+
   # delete part
     delete:
       tags:
@@ -319,6 +478,15 @@ paths:
           examples:
             application/json:
               message: "successfully deleted part <part_id>."
+
+        404:
+          description: "Part not found"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Part not found"
+            status: "Error"
 
 # Service Tickets
   # create service ticket
@@ -348,6 +516,15 @@ paths:
               service_desc: "tires"
               customer_id: 1
 
+        400:
+          description: "Missing data"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing data for required field."
+            status: "Error"
+
   # get all service tickets
   /service_tickets:
     get:
@@ -374,6 +551,15 @@ paths:
           schema:
             $ref: "#/definitions/GetCustomerServiceTickets"
 
+        404:
+          description: "No customer service tickets"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "No customer service tickets found"
+            status: "Error"
+
   # edit mechanics on service ticket
   /service_tickets/{ticket_id}/edit:
     put: 
@@ -399,6 +585,15 @@ paths:
               add_mechanic_ids: [3]
               remove_mechanic_ids: [2]
 
+        404:
+          description: "No service ticket"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "No service ticket found"
+            status: "Error"
+
   # add parts to service ticket
   /service_tickets/{ticket_id}/add_part:
     put: 
@@ -423,6 +618,15 @@ paths:
               ticket_id: 1
               part_id: 1
               quantity: 1
+
+        404:
+          description: "No service ticket"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "No service ticket found"
+            status: "Error"
 
 definitions:
 # Customers

@@ -1,7 +1,14 @@
 Project To Do List:
 
- - update swagger file to include all covered error codes in examples
+ - update swagger file to include all covered error codes in examples---
 
  - modify and troubleshoot negative tests to include more thorough testing by looking for specifics
 
- - ask how to troubleshoot main.yaml file: why exclamation point on file, how to troubleshoot failure in github
+
+
+
+CI/CD Pipline:
+Set up the deploy job in your .github/workflows/main.yaml and make it dependant on the test job needs: test
+
+Submission:
+After deploying submit the link to your deployed service as well as the the link to your github repository.
