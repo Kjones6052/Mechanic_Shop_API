@@ -64,7 +64,7 @@ class TestCustomer(unittest.TestCase):
 
         response = self.client.post('/customers/login', json=credentials)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['message'], 'invalid email or password')
+        self.assertEqual(response.json['message'], 'Invalid email or password')
 
     # get all customers tests
     def test_get_customers(self):

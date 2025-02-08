@@ -68,7 +68,7 @@ class TestPart(unittest.TestCase):
     def test_delete_part(self):
         response = self.client.delete('/inventory/1')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('succesfully deleted part 1', response.get_data(as_text=True))
+        self.assertIn('Succesfully deleted part 1', response.get_data(as_text=True))
 
     def test_invalid_delete(self):
         response = self.client.delete('/inventory/999')
