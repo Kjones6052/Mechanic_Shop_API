@@ -36,7 +36,7 @@ class TestPart(unittest.TestCase):
 
         response = self.client.post('/inventory/', json=part_payload)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['price'], ['missing data for required field.'])
+        self.assertEqual(response.json['price'], ['Missing data for required field.'])
 
     # get parts test
     def test_get_parts(self):
@@ -62,7 +62,7 @@ class TestPart(unittest.TestCase):
 
         response = self.client.put('/inventory/1', json=part_payload)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['price'], ['missing data for required field.'])
+        self.assertEqual(response.json['price'], ['Missing data for required field.'])
 
     # delete part tests
     def test_delete_part(self):

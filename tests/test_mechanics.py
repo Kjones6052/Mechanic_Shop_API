@@ -40,7 +40,7 @@ class TestMechanic(unittest.TestCase):
 
         response = self.client.post('/mechanics/', json=mechanic_payload)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['email'], ['missing data for required field.'])
+        self.assertEqual(response.json['email'], ['Missing data for required field.'])
 
     # get all mechanics test
     def test_get_mechanics(self):
@@ -70,7 +70,7 @@ class TestMechanic(unittest.TestCase):
 
         response = self.client.put('/mechanics/1', json=mechanic_payload)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['phone'], ['missing data for required field.'])
+        self.assertEqual(response.json['phone'], ['Missing data for required field.'])
 
     # delete mechanic tests
     def test_delete_mechanic(self):
