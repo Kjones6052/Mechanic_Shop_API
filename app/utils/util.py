@@ -6,10 +6,11 @@ from jose import jwt
 from datetime import datetime, timezone, timedelta
 from functools import wraps
 from flask import request, jsonify
+import os
 
 
 # Creating a token signature
-SECRET_KEY = "big bad mama jama"
+SECRET_KEY = os.environ.get('SQLALCHEMY_DATABASE_URI') or "big bad mama jama"
 
 # Funtion to encode token
 def encode_token(customer_id):

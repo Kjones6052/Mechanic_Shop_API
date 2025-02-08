@@ -1,2 +1,3 @@
-mechanicenv
-__pycache__
+mechanicenv/
+__pycache__/
+.env
