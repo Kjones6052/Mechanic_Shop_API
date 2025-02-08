@@ -37,7 +37,7 @@ def token_required(f): # f represents the function we are wrapping
 
             # if no token return message to user
             if not token:
-                return jsonify({'message': 'Missing token'}), 400
+                return jsonify({'message': 'missing token'}), 400
             
             # verify valid token & get customer_id
             try:
@@ -47,18 +47,18 @@ def token_required(f): # f represents the function we are wrapping
 
             # specified user message for expired token
             except jose.exceptions.ExpiredSignatureError:
-                return jsonify({'message': 'Token expired'}), 400
+                return jsonify({'message': 'token expired'}), 400
             
             # specified user message for invalid token
             except jose.exceptions.JWTError:
-                return jsonify({'message': 'Invalid token'}), 400
+                return jsonify({'message': 'invalid token'}), 400
             
             # Pass customer_id as a keyword argument to the wrapped route function
             kwargs['customer_id'] = customer_id
         
         # if token not verified return message to user
         else:
-            return jsonify({'message': 'You must be logged in to access this.'}), 400
+            return jsonify({'message': 'you must be logged in to access this.'}), 400
         
         # Call the route function with the modified args and kwargs
         return f(*args, **kwargs)

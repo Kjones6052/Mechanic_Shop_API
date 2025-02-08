@@ -42,7 +42,7 @@ class TestCustomer(unittest.TestCase):
 
         response = self.client.post('/customers/', json=customer_payload)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['email'], ['Missing data for required field.'])
+        self.assertEqual(response.json['email'], ['missing data for required field.'])
 
     # customer login tests
     def test_login_customer(self):
@@ -64,7 +64,7 @@ class TestCustomer(unittest.TestCase):
 
         response = self.client.post('/customers/login', json=credentials)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['message'], 'Invalid email or password')
+        self.assertEqual(response.json['message'], 'invalid email or password')
 
     # get all customers tests
     def test_get_customers(self):
@@ -107,7 +107,7 @@ class TestCustomer(unittest.TestCase):
         headers = {'Authorization': "Bearer " + self.test_login_customer()}
         response = self.client.put('/customers/1', json=customer_payload, headers=headers)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['phone'], ['Missing data for required field.'])
+        self.assertEqual(response.json['phone'], ['missing data for required field.'])
 
     # delete customer tests with token
     def test_delete_customer(self):
@@ -119,4 +119,4 @@ class TestCustomer(unittest.TestCase):
     def test_invalid_delete(self):
         response = self.client.delete('/customers/999')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('You must be logged in to access this.', response.get_data(as_text=True))
+        self.assertIn('you must be logged in to access this.', response.get_data(as_text=True))

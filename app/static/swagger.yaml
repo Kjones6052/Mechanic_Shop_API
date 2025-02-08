@@ -43,7 +43,7 @@ paths:
           examples:
             application/json:
             token: "nvjdsnjngjjbsnjngsjnjsnbjvbsbjbgsj..."
-            message: "Login successful"
+            message: "login successful"
             status: "success"
 
         400:
@@ -52,7 +52,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Invalid email or password"
+            messsage: "invalid email or password"
             status: "Error"
 
   # create customer
@@ -88,7 +88,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing data for required field."
+            messsage: "missing data for required field."
             status: "Error"
 
   # get all customers
@@ -130,7 +130,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Customer not found"
+            messsage: "customer not found"
             status: "Error"
 
   # update customer by id
@@ -167,7 +167,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Customer not found"
+            messsage: "customer not found"
             status: "Error"
 
         400:
@@ -176,7 +176,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing token"
+            messsage: "missing token"
             status: "Error"
 
         400:
@@ -185,7 +185,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Token expired"
+            messsage: "token expired"
             status: "Error"
 
         400:
@@ -194,7 +194,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Invalid token"
+            messsage: "invalid token"
             status: "Error"
 
         400:
@@ -203,7 +203,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Unauthorized: You must be logged in to access this."
+            messsage: "you must be logged in to access this."
             status: "Error"
 
   # delete customer by id
@@ -229,7 +229,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing token"
+            messsage: "missing token"
             status: "Error"
 
         400:
@@ -238,7 +238,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Token expired"
+            messsage: "token expired"
             status: "Error"
 
         400:
@@ -247,7 +247,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Invalid token"
+            messsage: "invalid token"
             status: "Error"
 
         400:
@@ -256,7 +256,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Unauthorized: You must be logged in to access this."
+            messsage: "you must be logged in to access this."
             status: "Error"
 
 # Mechanics
@@ -293,7 +293,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing data for required field."
+            messsage: "missing data for required field."
             status: "Error"
 
   # get all mechanics
@@ -342,7 +342,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Mechanic not found"
+            messsage: "mechanic not found"
             status: "Error"
 
   # delete mechanic
@@ -366,7 +366,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Mechanic not found"
+            messsage: "mechanic not found"
             status: "Error"
 
   # most valuable mechanic
@@ -414,7 +414,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing data for required field."
+            messsage: "missing data for required field."
             status: "Error"
 
   # get all parts
@@ -461,7 +461,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Part not found"
+            messsage: "part not found"
             status: "Error"
 
   # delete part
@@ -485,7 +485,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Part not found"
+            messsage: "part not found"
             status: "Error"
 
 # Service Tickets
@@ -522,7 +522,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "Missing data for required field."
+            messsage: "missing data for required field."
             status: "Error"
 
   # get all service tickets
@@ -557,7 +557,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "No customer service tickets found"
+            messsage: "no customer service tickets found"
             status: "Error"
 
   # edit mechanics on service ticket
@@ -591,7 +591,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "No service ticket found"
+            messsage: "no service ticket found"
             status: "Error"
 
   # add parts to service ticket
@@ -625,7 +625,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "No service ticket found"
+            messsage: "no service ticket found"
             status: "Error"
 
 definitions:

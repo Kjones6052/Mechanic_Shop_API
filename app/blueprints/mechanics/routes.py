@@ -49,7 +49,7 @@ def update_mechanic(mechanic_id):
     mechanic = db.session.execute(query).scalars().first()
     
     if mechanic == None:
-        return jsonify({"message": 'Mechanic not found'}), 400
+        return jsonify({"message": 'mechanic not found'}), 400
 
     try: 
         mechanic_data = mechanic_schema.load(request.json)
@@ -70,7 +70,7 @@ def delete_mechanic(mechanic_id):
         db.session.delete(mechanic)
         db.session.commit()
         return jsonify({"message": f"Succesfully deleted mechanic {mechanic_id}"}), 200
-    return jsonify({"message": 'Mechanic not found'}), 400
+    return jsonify({"message": 'mechanic not found'}), 400
     
 
 

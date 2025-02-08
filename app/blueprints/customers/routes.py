@@ -35,13 +35,13 @@ def login():
         # define successful user message
         response = {
             "status": "success",
-            "message": "Successfully logged in",
+            "message": "successfully logged in",
             "token": token
         }
 
         return jsonify(response), 200 # return successful user message to user display
     else:
-        return jsonify({"message": "Invalid email or password"}), 400 # if error diplay to user
+        return jsonify({"message": "invalid email or password"}), 400 # if error diplay to user
 
 
 # Create New Customer
@@ -86,7 +86,7 @@ def get_customer(customer_id):
     customer = db.session.execute(query).scalars().first()
     
     if customer == None:
-        return jsonify({"message": "Customer not found"}), 400
+        return jsonify({"message": "customer not found"}), 400
     
     return customer_schema.jsonify(customer), 200
 
@@ -98,7 +98,7 @@ def update_customer(customer_id):
     customer = db.session.execute(query).scalars().first()
     
     if customer == None:
-        return jsonify({"message": "Customer not found"}), 400
+        return jsonify({"message": "customer not found"}), 400
 
     try: 
         customer_data = customer_schema.load(request.json)
@@ -118,4 +118,4 @@ def delete_customer(customer_id):
     customer = db.session.get(Customer, customer_id)
     db.session.delete(customer)
     db.session.commit()
-    return jsonify({"message": f"Succesfully deleted customer {customer_id}"}), 200
+    return jsonify({"message": f"succesfully deleted customer {customer_id}"}), 200
