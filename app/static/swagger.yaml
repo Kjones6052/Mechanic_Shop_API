@@ -124,7 +124,7 @@ paths:
               email: "johnd@email.com"
               password: "password123"
 
-        404:
+        400:
           description: "Customer not found"
           schema: 
             type: "object"
@@ -161,7 +161,7 @@ paths:
               email: "dohnj@email.com"
               password: "password123" 
 
-        404:
+        400:
           description: "Customer not found"
           schema: 
             type: "object"
@@ -197,7 +197,7 @@ paths:
             messsage: "Invalid token"
             status: "Error"
 
-        401:
+        400:
           description: "Unauthorized"
           schema: 
             type: "object"
@@ -250,7 +250,7 @@ paths:
             messsage: "Invalid token"
             status: "Error"
 
-        401:
+        400:
           description: "Unauthorized"
           schema: 
             type: "object"
@@ -336,7 +336,7 @@ paths:
               phone: "7894560123"
               salary: 100.00
 
-        404:
+        400:
           description: "Mechanic not found"
           schema: 
             type: "object"
@@ -360,7 +360,7 @@ paths:
             application/json:
               message: "successfully deleted mechanic <mechanic_id>."
 
-        404:
+        400:
           description: "Mechanic not found"
           schema: 
             type: "object"
@@ -455,7 +455,7 @@ paths:
               part_name: "tire"
               price: 110.00
 
-        404:
+        400:
           description: "Part not found"
           schema: 
             type: "object"
@@ -479,7 +479,7 @@ paths:
             application/json:
               message: "successfully deleted part <part_id>."
 
-        404:
+        400:
           description: "Part not found"
           schema: 
             type: "object"
@@ -551,7 +551,7 @@ paths:
           schema:
             $ref: "#/definitions/GetCustomerServiceTickets"
 
-        404:
+        400:
           description: "No customer service tickets"
           schema: 
             type: "object"
@@ -585,7 +585,7 @@ paths:
               add_mechanic_ids: [3]
               remove_mechanic_ids: [2]
 
-        404:
+        400:
           description: "No service ticket"
           schema: 
             type: "object"
@@ -619,7 +619,7 @@ paths:
               part_id: 1
               quantity: 1
 
-        404:
+        400:
           description: "No service ticket"
           schema: 
             type: "object"

@@ -86,7 +86,7 @@ def get_customer(customer_id):
     customer = db.session.execute(query).scalars().first()
     
     if customer == None:
-        return jsonify({"message": "Customer not found"}), 404
+        return jsonify({"message": "Customer not found"}), 400
     
     return customer_schema.jsonify(customer), 200
 
@@ -98,7 +98,7 @@ def update_customer(customer_id):
     customer = db.session.execute(query).scalars().first()
     
     if customer == None:
-        return jsonify({"message": "Customer not found"}), 404
+        return jsonify({"message": "Customer not found"}), 400
 
     try: 
         customer_data = customer_schema.load(request.json)

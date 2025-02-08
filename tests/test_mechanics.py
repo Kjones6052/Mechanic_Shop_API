@@ -69,7 +69,7 @@ class TestMechanic(unittest.TestCase):
         }
 
         response = self.client.put('/mechanics/1', json=mechanic_payload)
-        self.assertEqual(response.status_code, 400 or 404)
+        self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json['phone'], ['Missing data for required field.'])
 
     # delete mechanic tests
@@ -80,7 +80,7 @@ class TestMechanic(unittest.TestCase):
 
     def test_invalid_delete(self):
         response = self.client.delete('/mechanics/999')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
 
     # most valuable mechanic tests
     def test_most_valuable_mechanic(self):

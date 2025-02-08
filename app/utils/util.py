@@ -58,7 +58,7 @@ def token_required(f): # f represents the function we are wrapping
         
         # if token not verified return message to user
         else:
-            return jsonify({'message': 'Unauthorized: You must be logged in to access this.'}), 401
+            return jsonify({'message': 'You must be logged in to access this.'}), 400
         
         # Call the route function with the modified args and kwargs
         return f(*args, **kwargs)

@@ -61,7 +61,7 @@ class TestServiceTicket(unittest.TestCase):
         }
 
         response = self.client.post('/service_tickets/', json=service_ticket_payload)
-        self.assertEqual(response.status_code, 400 or 404)
+        self.assertEqual(response.status_code, 400)
         # self.assertEqual(response.json['customer_id'], ['Missing data for required field.'])
 
     # get all service ticket tests
@@ -77,7 +77,7 @@ class TestServiceTicket(unittest.TestCase):
 
     def test_invalid_get_service_ticket_by_id(self):
         response = self.client.get('/service_tickets/999/my_tickets')
-        self.assertEqual(response.status_code, 400 or 401 or 404)
+        self.assertEqual(response.status_code, 400)
 
     # edit mechanics on service ticket tests
     def test_edit_mechanics_service_ticket(self):
@@ -97,7 +97,7 @@ class TestServiceTicket(unittest.TestCase):
         }
 
         response = self.client.put('/service_tickets/1/edit', json=edit_mechanics_payload)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json['remove_mechanic_ids'], ['Missing data for required field.'])
 
     # add required parts to service ticket tests
@@ -120,5 +120,5 @@ class TestServiceTicket(unittest.TestCase):
 
         response = self.client.put('/service_tickets/1/add_part', json=part_payload)
         print("\nPRINTING: add parts\n",response.json)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json['ticket_id'], ['Missing data for required field.'])
