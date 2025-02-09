@@ -1,3 +1,5 @@
 Project To Do List:
 
+    -   create new test for info specific cases and document them
+
     -   modify and troubleshoot negative tests to include more thorough testing by looking for specifics in multiple tests
