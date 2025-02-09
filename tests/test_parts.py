@@ -61,7 +61,7 @@ class TestPart(unittest.TestCase):
         }
 
         response = self.client.put('/inventory/1', json=part_payload)
-        self.assertEqual(response.status_code, [400, 404])
+        self.assertIn(response.status_code, [400, 404])
         self.assertEqual(response.json['price'], ['Missing data for required field.'])
 
     # delete part tests
