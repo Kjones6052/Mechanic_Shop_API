@@ -124,7 +124,7 @@ paths:
               email: "johnd@email.com"
               password: "password123"
 
-        400:
+        404:
           description: "Customer not found"
           schema: 
             type: "object"
@@ -161,7 +161,7 @@ paths:
               email: "dohnj@email.com"
               password: "password123" 
 
-        400:
+        404:
           description: "Customer not found"
           schema: 
             type: "object"
@@ -170,7 +170,7 @@ paths:
             messsage: "customer not found"
             status: "Error"
 
-        400:
+        401:
           description: "Missing token"
           schema: 
             type: "object"
@@ -179,7 +179,7 @@ paths:
             messsage: "missing token"
             status: "Error"
 
-        400:
+        401:
           description: "Token expired"
           schema: 
             type: "object"
@@ -188,7 +188,7 @@ paths:
             messsage: "token expired"
             status: "Error"
 
-        400:
+        401:
           description: "Invalid token"
           schema: 
             type: "object"
@@ -197,7 +197,7 @@ paths:
             messsage: "invalid token"
             status: "Error"
 
-        400:
+        401:
           description: "Unauthorized"
           schema: 
             type: "object"
@@ -223,7 +223,7 @@ paths:
             application/json:
               message: "successfully deleted user <customer_id>."
 
-        400:
+        401:
           description: "Missing token"
           schema: 
             type: "object"
@@ -232,7 +232,7 @@ paths:
             messsage: "missing token"
             status: "Error"
 
-        400:
+        401:
           description: "Token expired"
           schema: 
             type: "object"
@@ -241,7 +241,7 @@ paths:
             messsage: "token expired"
             status: "Error"
 
-        400:
+        401:
           description: "Invalid token"
           schema: 
             type: "object"
@@ -250,7 +250,7 @@ paths:
             messsage: "invalid token"
             status: "Error"
 
-        400:
+        401:
           description: "Unauthorized"
           schema: 
             type: "object"
@@ -336,7 +336,7 @@ paths:
               phone: "7894560123"
               salary: 100.00
 
-        400:
+        404:
           description: "Mechanic not found"
           schema: 
             type: "object"
@@ -360,7 +360,7 @@ paths:
             application/json:
               message: "successfully deleted mechanic <mechanic_id>."
 
-        400:
+        404:
           description: "Mechanic not found"
           schema: 
             type: "object"
@@ -455,7 +455,7 @@ paths:
               part_name: "tire"
               price: 110.00
 
-        400:
+        404:
           description: "Part not found"
           schema: 
             type: "object"
@@ -479,7 +479,7 @@ paths:
             application/json:
               message: "successfully deleted part <part_id>."
 
-        400:
+        404:
           description: "Part not found"
           schema: 
             type: "object"
@@ -551,7 +551,7 @@ paths:
           schema:
             $ref: "#/definitions/GetCustomerServiceTickets"
 
-        400:
+        404:
           description: "No customer service tickets"
           schema: 
             type: "object"
@@ -585,7 +585,7 @@ paths:
               add_mechanic_ids: [3]
               remove_mechanic_ids: [2]
 
-        400:
+        404:
           description: "No service ticket"
           schema: 
             type: "object"
@@ -619,7 +619,7 @@ paths:
               part_id: 1
               quantity: 1
 
-        400:
+        404:
           description: "No service ticket"
           schema: 
             type: "object"

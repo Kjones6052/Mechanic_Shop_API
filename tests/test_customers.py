@@ -78,8 +78,9 @@ class TestCustomer(unittest.TestCase):
 
     def test_invalid_get_customer_by_id(self):
         response = self.client.get('/customers/999')
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, [400, 404])
         self.assertIn('invalid customer id', response.get_data(as_text=True))
+        self.assertIn('customer not found', response.get_data(as_text=True))
     
     # update customer tests
     def test_update_customer(self):
