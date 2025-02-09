@@ -1,5 +1,3 @@
 Project To Do List:
 
-    -   make error codes more specific and update tests to check for the options (also ensure the changes are consistent in all files)
-
-    -   modify and troubleshoot negative tests to include more thorough testing by looking for specifics
+    -   modify and troubleshoot negative tests to include more thorough testing by looking for specifics in multiple tests

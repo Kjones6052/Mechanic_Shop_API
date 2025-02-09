@@ -88,7 +88,7 @@ paths:
             type: "object"
           examples:
             application/json:
-            messsage: "missing data for required field."
+            messsage: "Missing data for required field."
             status: "Error"
 
   # get all customers
@@ -335,6 +335,15 @@ paths:
               email: "jwfixit@email.com"
               phone: "7894560123"
               salary: 100.00
+
+        400:
+          description: "Missing data"
+          schema: 
+            type: "object"
+          examples:
+            application/json:
+            messsage: "Missing data for required field."
+            status: "Error"
 
         404:
           description: "Mechanic not found"
