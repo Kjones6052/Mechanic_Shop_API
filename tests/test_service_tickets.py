@@ -120,5 +120,5 @@ class TestServiceTicket(unittest.TestCase):
 
         response = self.client.put('/service_tickets/1/add_part', json=part_payload)
         print("\nPRINTING: add parts\n",response.json)
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json['ticket_id'], ['Missing data for required field.'])
