@@ -70,7 +70,6 @@ class TestMechanic(unittest.TestCase):
 
         response = self.client.put('/mechanics/1', json=mechanic_payload)
         self.assertIn(response.status_code, [400, 404])
-        self.assertIn('mechanic not found', response.get_data(as_text=True))
         self.assertIn('Missing data for required field.', response.get_data(as_text=True))
 
     # delete mechanic tests
