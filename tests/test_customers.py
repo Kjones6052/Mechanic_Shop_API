@@ -36,7 +36,7 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(response.json['phone'], "2223334444")
         self.assertEqual(response.json['password'], "testpassword")
 
-    def test_invalid_creation(self):
+    def test_invalid_customer_creation(self):
         customer_payload = {
             "name": "John Doe",
             "phone": "123-456-7890",
@@ -59,7 +59,7 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(response.json['status'], 'success')
         return response.json['token']
     
-    def test_invalid_login(self):
+    def test_invalid_customer_login(self):
         credentials = {
             "email": "bad_email@email.com",
             "password": "bad_pw"
@@ -103,7 +103,7 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(response.json['phone'], "5558889999")
         self.assertEqual(response.json['password'], "testpw")
 
-    def test_invalid_update(self):
+    def test_invalid_customer_update(self):
         customer_payload = {
             "name": "John Doe",
             "email": "test@email.com",
@@ -122,7 +122,7 @@ class TestCustomer(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('succesfully deleted customer 1', response.get_data(as_text=True))
 
-    def test_invalid_delete(self):
+    def test_invalid_customer_delete(self):
         response = self.client.delete('/customers/999')
         self.assertIn(response.status_code, [400, 401])
         self.assertIn('you must be logged in to access this.', response.get_data(as_text=True))

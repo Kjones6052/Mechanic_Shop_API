@@ -31,7 +31,7 @@ class TestMechanic(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['name'], "Joe Mechanic")
 
-    def test_invalid_creation(self):
+    def test_invalid_mechanic_creation(self):
         mechanic_payload = {
             "name": "Moe Mechanic",
             "phone": "9998887777",
@@ -61,7 +61,7 @@ class TestMechanic(unittest.TestCase):
         self.assertEqual(response.json['name'], 'Peter') 
         self.assertEqual(response.json['email'], 'example@email.com')
 
-    def test_invalid_update(self):
+    def test_invalid_mechanic_update(self):
         mechanic_payload = {
             "name": "Joe Mechanic",
             "email": "test@email.com",
@@ -70,8 +70,8 @@ class TestMechanic(unittest.TestCase):
 
         response = self.client.put('/mechanics/1', json=mechanic_payload)
         self.assertIn(response.status_code, [400, 404])
-        self.assertIn(response.json['phone'], ['Missing data for required field.'])
         self.assertIn('mechanic not found', response.get_data(as_text=True))
+        self.assertIn('Missing data for required field.', response.get_data(as_text=True))
 
     # delete mechanic tests
     def test_delete_mechanic(self):
@@ -79,7 +79,7 @@ class TestMechanic(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('succesfully deleted mechanic 1', response.get_data(as_text=True))
 
-    def test_invalid_delete(self):
+    def test_invalid_mechanic_delete(self):
         response = self.client.delete('/mechanics/999')
         self.assertEqual(response.status_code, 404)
 

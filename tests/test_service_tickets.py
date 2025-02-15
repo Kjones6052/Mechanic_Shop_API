@@ -52,7 +52,7 @@ class TestServiceTicket(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['service_desc'], "tires")
 
-    def test_invalid_creation(self):
+    def test_invalid_ticket_creation(self):
         service_ticket_payload = {
             "VIN": "11122233344455577",
             "service_date": self.date,

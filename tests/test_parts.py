@@ -29,7 +29,7 @@ class TestPart(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json['part_name'], "tire")
 
-    def test_invalid_creation(self):
+    def test_invalid_part_creation(self):
         part_payload = {
             "part_name": "tire"     
         }
@@ -55,7 +55,7 @@ class TestPart(unittest.TestCase):
         self.assertEqual(response.json['part_name'], 'tire') 
         self.assertEqual(response.json['price'], 150.00)
 
-    def test_invalid_update(self):
+    def test_invalid_part_update(self):
         part_payload = {
             "part_name": "tire"      
         }
@@ -70,6 +70,6 @@ class TestPart(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('succesfully deleted part 1', response.get_data(as_text=True))
 
-    def test_invalid_delete(self):
+    def test_invalid_part_delete(self):
         response = self.client.delete('/inventory/999')
         self.assertEqual(response.status_code, 404)
