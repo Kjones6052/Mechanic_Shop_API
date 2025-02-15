@@ -111,6 +111,13 @@ paths:
         - Customers
       summary: "Get customer by id endpoint"
       description: "Takes a customer id and returns the matching customer data."
+      parameters:
+        - in: path
+          name: customer_id
+          schema: 
+            type: integer
+          required: true
+          description: Numeric ID of the customer to get 
       responses:
         200:
           description: "Retrieved Customer Successfully"           
@@ -1028,8 +1035,12 @@ definitions:
         type: "integer"
       add_mechanic_ids:
         type: "array"
+        items: 
+          type: int
       remove_mechanic_ids:
         type: "array"
+        items: 
+          type: int
       
     required:
       - ticket_id
