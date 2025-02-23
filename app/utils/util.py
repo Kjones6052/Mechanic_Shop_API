@@ -6,6 +6,8 @@ from jose import jwt
 from datetime import datetime, timezone, timedelta
 from functools import wraps
 from flask import request, jsonify
+from urllib.request import urlopen
+import json
 import os
 
 
@@ -65,3 +67,70 @@ def token_required(f): # f represents the function we are wrapping
       
     # return decorated(wrapped) function 
     return decorated
+
+
+# Auth0 Verification and Use
+AUTH0_DOMAIN = "Auth0 App Domain"
+API_IDENTIFIER = "MSAPI000001"
+ALGORITHMS = ["RS256"]
+
+# Auth0 Token Verification
+def verify_token(token):
+    jsonurl = urlopen(f"https://{AUTH0_DOMAIN}/.well-known/jwks.json")
+    jwks = json.loads(jsonurl.read())
+    unverified_header = jwt.get_unverified_header(token)
+
+    rsa_key = {}
+
+    for key in jwks["keys"]:
+        if key["kidd"] == unverified_header["kid"]:
+            rsa_key = {
+                "kty": key["kty"],
+                "kid": key["kid"],
+                "use": key["use"],
+                "n": key["n"],
+                "e": key["e"],
+            }
+        if rsa_key:
+            try:
+                payload = jwt.decode(
+                    token,
+                    rsa_key,
+                    algorithms=ALGORITHMS,
+                    audience=API_IDENTIFIER,
+                    issuer=f"https://{AUTH0_DOMAIN}/",
+                )
+                print('PAYLOAD:', payload) # used for testing errors
+                return payload
+            except jwt.ExpiredSignatureError:
+                raise ValueError("Token is expired.")
+            except jwt.JWTClaimsError:
+                raise ValueError("Incorrect claims. Check the audience and issuer.")
+            except Exception:
+                raise ValueError("Unable to parse authentication token.")
+        raise ValueError("No matching RSA key.")
+
+def auth_token_required(f):
+    def auth_decorated(*args, **kwargs):
+        auth = request.headers.get("Authorization", None)
+        if not auth:
+            return jsonify({"message": "Authorization header is missing"}), 401
+        
+        if "Bearer" not in auth:
+            return jsonify({"message": "Bearer <Token> required."}), 401
+
+        try:
+            token = auth.split()[1]
+            payload = verify_token(token) # used for testing errors
+        except ValueError as e:
+            return jsonify({"message": str(e)}), 401
+        
+        return f(payload, *args, **kwargs)
+    
+    return auth_decorated
+
+# example of protected route will be removed later
+# @app.route("/protected", methods=["GET"])
+# @auth_token_required
+# def protected(payload):
+#     return jsonify({"message": "You accessed a protected route!", "customer":payload})
